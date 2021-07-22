@@ -143,15 +143,27 @@ export default {
       menuList: [
         {
           id: 1,
-          icon: 'fas fa-gift',
+          icon: 'fas fa-fw fa-gift',
           name: '商品管理',
           path: '/admin/products',
         },
         {
           id: 2,
-          icon: 'fas fa-shopping-cart',
+          icon: 'fas fa-fw fa-shopping-cart',
           name: '訂單管理',
           path: '/admin/orders',
+        },
+        {
+          id: 3,
+          icon: 'fas fa-fw fa-newspaper',
+          name: '文章管理',
+          path: '/admin/articles',
+        },
+        {
+          id: 4,
+          icon: 'fas fa-fw fa-ticket-alt',
+          name: '折價券管理',
+          path: '/admin/coupons',
         },
       ],
     };
@@ -167,7 +179,9 @@ export default {
           .post(`${process.env.VUE_APP_API_URL}/api/user/check`)
           .then((response) => {
             if (response.data.success) {
-              successCallback();
+              if (successCallback) {
+                successCallback();
+              }
             } else {
               this.$router.push('/login');
             }

@@ -13,36 +13,39 @@
                     <div class="text-center">
                       <h1 class="h4 text-gray-900 mb-4">請先登入</h1>
                     </div>
-                    <form class="user">
+                    <Form v-slot="{ errors }" ref="form" class="user" @submit="login">
                       <div class="mb-3">
-                        <input
-                          class="form-control py-3"
-                          placeholder="帳號"
+                        <Field
                           id="account"
+                          name="帳號"
                           type="email"
+                          class="form-control py-3"
+                          :class="{ 'is-invalid': errors['帳號'] }"
+                          placeholder="請輸入帳號"
+                          rules="email|required"
                           v-model="username"
-                        />
+                        ></Field>
+                        <ErrorMessage name="帳號" class="invalid-feedback"></ErrorMessage>
                       </div>
                       <div class="mb-3">
-                        <input
-                          class="form-control py-3"
-                          placeholder="密碼"
+                        <Field
                           id="password"
+                          name="密碼"
                           type="password"
+                          class="form-control py-3"
+                          :class="{ 'is-invalid': errors['密碼'] }"
+                          placeholder="請輸入密碼"
+                          rules="required"
                           v-model="password"
-                        />
+                        ></Field>
+                        <ErrorMessage name="密碼" class="invalid-feedback"></ErrorMessage>
                       </div>
                       <div class="d-grid">
-                        <button
-                          type="button"
-                          class="btn btn-primary py-3"
-                          id="loginBtn"
-                          @click="login"
-                        >
+                        <button type="submit" class="btn btn-primary py-3" id="loginBtn">
                           登入
                         </button>
                       </div>
-                    </form>
+                    </Form>
                   </div>
                 </div>
               </div>

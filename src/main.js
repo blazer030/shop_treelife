@@ -13,6 +13,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import jquery from 'jquery';
 import moshaToast from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import App from './App.vue';
 import router from './router';
 
@@ -37,4 +38,5 @@ app.component('Loading', Loading);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(moshaToast);
+app.use(CKEditor);
 app.mount('#app');
