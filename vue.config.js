@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/shop-treelife/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/shop_treelife/' : '/',
 };
