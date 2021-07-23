@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-5">
+  <div class="container my-4">
     <loading :active="isLoading" />
     <div class="row">
       <div class="col-sm-12 col-md-5 text-center">

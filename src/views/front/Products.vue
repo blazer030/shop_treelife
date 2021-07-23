@@ -1,9 +1,9 @@
 <template>
-  <div class="container my-5">
+  <div class="container my-4">
     <loading :active="isLoading"/>
     <div class="row">
-      <div class="col-lg-2 col-md-3">
-        <ul class="list-group rounded-0" v-if="false">
+      <div class="col-lg-2 col-md-3 mb-4">
+        <ul class="list-group rounded-0">
           <li class="list-group-item active" aria-current="true">商品類別(無作用)</li>
           <li class="list-group-item">商品類別(無作用)</li>
           <li class="list-group-item">商品類別(無作用)</li>

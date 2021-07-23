@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-5">
+  <div class="container my-4">
     <loading :active="isLoading" />
     <!-- 購物車列表 -->
     <div class="text-end">

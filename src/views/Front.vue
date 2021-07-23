@@ -1,31 +1,53 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <navbar></navbar>
+    <main>
+      <router-view />
+    </main>
+    <footer>
       <div class="container">
-        <router-link class="navbar-brand" to="/">TreeLife</router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <router-link class="nav-link" to="/products">產品列表</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/cart">購物車</router-link>
-            </li>
-          </ul>
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Contact</h2>
+            <ul class="footer-list">
+              <li>
+                <a href="tel:0912345678"> <i class="fas fa-fw fa-phone"></i>&emsp;0912345678 </a>
+              </li>
+              <li>
+                <a href="mailto:0912345678">
+                  <i class="far fa-fw fa-envelope"></i>&emsp;blazer030@gmail
+                </a>
+              </li>
+              <li><i class="fas fa-fw fa-map-marker-alt"></i>&emsp;高雄市前鎮區55號</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h2>Quink Links</h2>
+            <ul class="footer-list">
+              <li><router-link class="nav-link" to="/">首頁</router-link></li>
+              <li><router-link class="nav-link" to="/">最新消息</router-link></li>
+              <li><router-link class="nav-link" to="/products">線上購物</router-link></li>
+              <li><router-link class="nav-link" to="/">購物說明</router-link></li>
+              <li><router-link class="nav-link" to="/">聯絡我們</router-link></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </nav>
-    <router-view />
+      <div class="container">
+        <p>
+          無商業用途，僅供學習使用
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
+
+<script>
+import navbar from '@/components/front/Navbar.vue';
+
+export default {
+  components: {
+    navbar,
+  },
+};
+</script>
