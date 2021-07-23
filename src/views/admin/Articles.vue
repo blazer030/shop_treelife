@@ -70,7 +70,7 @@
             </div>
             <div class="text-center">
               <p>
-                目前有 <span id="articleCount">{{ articleList.length }}</span> 項商品
+                目前有 <span id="articleCount">{{ articleList.length }}</span> 項文章
               </p>
             </div>
             <pagination :page-info="pageInfo" @page-change="getArticle"></pagination>

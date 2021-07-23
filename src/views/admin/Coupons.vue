@@ -3,58 +3,62 @@
     <loading :active="isLoading"/>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-shopping-cart"></i> 訂單管理</h1>
+      <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-gift"></i> 折價券管理</h1>
     </div>
 
     <div class="row">
       <div class="col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">訂單列表</h6>
+            <h6 class="m-0 font-weight-bold text-primary">折價券列表</h6>
           </div>
           <div class="card-body">
+            <button type="button" class="btn btn-sm btn-success" @click="openModal('add')">
+              新增折價券
+            </button>
+
             <div class="table-responsive">
               <table class="table mt-4">
                 <thead>
                   <tr>
-                    <th width="20%" class="text-center">訂單編號</th>
-                    <th width="15%">收件人姓名</th>
-                    <th width="15%">收件人信箱</th>
-                    <th width="10%" class="text-end">金額</th>
-                    <th width="10%" class="text-center">付款狀態</th>
-                    <th width="8%" class="text-center">編輯</th>
-                    <th width="8%" class="text-center">刪除</th>
+                    <th width="30%">折價券名稱</th>
+                    <th width="10%">折扣代碼</th>
+                    <th width="10%" class="text-end">折扣數</th>
+                    <th width="20%" class="text-center">到期日</th>
+                    <th width="10%" class="text-center">是否啟用</th>
+                    <th width="10%" class="text-center">編輯</th>
+                    <th width="10%" class="text-center">刪除</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="order in orderList" :key="order.id">
-                    <td class="text-center">
-                      {{ order.create_at }}
+                  <tr v-for="coupon in couponList" :key="coupon.id">
+                    <td>
+                      {{ coupon.title }}
                     </td>
                     <td>
-                      {{ order.user.name }}
-                    </td>
-                    <td>
-                      {{ order.user.email }}
+                      {{ coupon.code }}
                     </td>
                     <td class="text-end">
-                      {{ order.total }}
+                      {{ coupon.percent }}%
+                    </td>
+                    <td class="text-center">
+                      {{ convertDatetime(coupon.due_date) }}
                     </td>
                     <td class="text-center">
                       <span
                         class="badge pointer"
-                        :class="order.is_paid ? 'bg-success' : 'bg-secondary'"
+                        :class="coupon.is_enabled ? 'bg-success' : 'bg-secondary'"
                         style="font-size:1em;"
-                        @click="paidChange(order)"
+                        @click="enableChange(coupon)"
                       >
-                        {{ order.is_paid ? '已付款' : '未付款' }}
+                        {{ coupon.is_enabled ? 'ON' : 'OFF' }}
                       </span>
                     </td>
                     <td class="text-center">
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-success move"
-                        @click="openModal('update', order)"
+                        @click="openModal('update', coupon)"
                       >
                         編輯
                       </button>
@@ -63,7 +67,7 @@
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-danger move"
-                        @click="openModal('delete', order)"
+                        @click="openModal('delete', coupon)"
                       >
                         刪除
                       </button>
@@ -74,32 +78,36 @@
             </div>
             <div class="text-center">
               <p>
-                目前有 <span id="productCount">{{ orderList.length }}</span> 筆訂單
+                目前有 <span id="couponCount">{{ couponList.length }}</span> 項折價券
               </p>
             </div>
-            <pagination :page-info="pageInfo" @page-change="getOrder"></pagination>
+            <pagination :page-info="pageInfo" @page-change="getCoupon"></pagination>
           </div>
         </div>
       </div>
     </div>
-    <order-modal :order="tempOrder" @modify-order="modifyOrder" ref="orderModal"></order-modal>
-    <delete-modal :item="tempOrder" @confirm="deleteOrder" ref="deleteModal"></delete-modal>
+    <coupon-modal
+      :coupon="tempCoupon"
+      :title="couponModalTitle"
+      @modify-coupon="modifyCoupon"
+      ref="couponModal"
+    ></coupon-modal>
+    <delete-modal :item="tempCoupon" @confirm="deleteCoupon" ref="deleteModal"></delete-modal>
   </div>
 </template>
 
 <script>
 import pagination from '@/components/admin/Pagination.vue';
-import orderModal from '@/components/admin/OrderModal.vue';
+import couponModal from '@/components/admin/CouponModal.vue';
 import deleteModal from '@/components/admin/DeleteModal.vue';
 
 export default {
   data() {
     return {
       isLoading: false,
-      orderList: [],
-      tempOrder: {
-        user: {},
-        products: [],
+      updateId: -1,
+      couponList: [],
+      tempCoupon: {
       },
       pageInfo: {
         total_pages: 1,
@@ -107,24 +115,24 @@ export default {
         has_pre: false,
         has_next: false,
       },
+      couponModalTitle: '新增折價券',
     };
   },
   components: {
     pagination,
-    orderModal,
+    couponModal,
     deleteModal,
   },
   methods: {
-    getOrder(page = 1) {
+    getCoupon(page = 1) {
       this.isLoading = true;
       this.$http
         .get(
-          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/orders?page=${page}`,
+          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/coupons?page=${page}`,
         )
         .then((response) => {
-          this.isLoading = false;
           if (response.data.success) {
-            this.orderList = response.data.orders;
+            this.couponList = response.data.coupons;
             this.pageInfo = response.data.pagination;
           } else {
             this.$moshaToast(response.data.message, {
@@ -133,108 +141,125 @@ export default {
               position: 'bottom-right',
             });
           }
+          this.isLoading = false;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    openModal(action, order) {
+    openModal(action, coupon) {
       switch (action) {
+        case 'add':
         case 'update':
-          this.tempOrder = JSON.parse(JSON.stringify(order));
-          this.$refs.orderModal.openModal();
+          if (coupon) {
+            this.couponModalTitle = '修改折價券';
+            this.tempCoupon = { ...coupon };
+          } else {
+            this.updateId = -1;
+            this.couponModalTitle = '新增折價券';
+            this.tempCoupon = {
+              title: '',
+              code: '',
+              percent: 0,
+              due_date: Date.now(),
+              is_enabled: 1,
+            };
+          }
+          this.$refs.couponModal.openModal();
           break;
         case 'delete':
-          this.tempOrder = JSON.parse(JSON.stringify(order));
-          this.tempOrder.title = `訂單編號：${order.create_at}`;
+          this.tempCoupon = { ...coupon };
           this.$refs.deleteModal.openModal();
           break;
         default:
           break;
       }
     },
-    modifyOrder() {
+    modifyCoupon() {
       let errorCount = 0;
-
-      if (!this.tempOrder.user) {
+      if (this.tempCoupon.title === '') {
+        setTimeout(() => {
+          this.$moshaToast('請輸入折價券標題', {
+            type: 'danger',
+            showIcon: true,
+            position: 'bottom-right',
+          });
+        }, 1);
         errorCount += 1;
-        this.$moshaToast('請填寫收件人資訊', {
-          type: 'danger',
-          showIcon: true,
-          position: 'bottom-right',
-        });
-      } else {
-        if (!this.tempOrder.user.email) {
-          errorCount += 1;
-          setTimeout(() => {
-            this.$moshaToast('請填寫Email', {
-              type: 'danger',
-              showIcon: true,
-              position: 'bottom-right',
-            });
-          }, 1);
-        }
+      }
 
-        if (!this.tempOrder.user.name) {
-          errorCount += 1;
-          setTimeout(() => {
-            this.$moshaToast('請填寫收件人名稱', {
-              type: 'danger',
-              showIcon: true,
-              position: 'bottom-right',
-            });
-          }, 1);
-        }
+      if (this.tempCoupon.code === '') {
+        setTimeout(() => {
+          this.$moshaToast('請輸入折價券代碼', {
+            type: 'danger',
+            showIcon: true,
+            position: 'bottom-right',
+          });
+        }, 1);
+        errorCount += 1;
+      }
 
-        if (!this.tempOrder.user.tel) {
-          errorCount += 1;
-          setTimeout(() => {
-            this.$moshaToast('請填寫收件人電話', {
-              type: 'danger',
-              showIcon: true,
-              position: 'bottom-right',
-            });
-          }, 1);
-        }
+      if (this.tempCoupon.due_date === '') {
+        setTimeout(() => {
+          this.$moshaToast('請輸入到期日', {
+            type: 'danger',
+            showIcon: true,
+            position: 'bottom-right',
+          });
+        }, 1);
+        errorCount += 1;
+      }
 
-        if (!this.tempOrder.user.address) {
-          errorCount += 1;
-          setTimeout(() => {
-            this.$moshaToast('請填寫收件人地址', {
-              type: 'danger',
-              showIcon: true,
-              position: 'bottom-right',
-            });
-          }, 1);
-        }
+      if (this.tempCoupon.percent === '') {
+        setTimeout(() => {
+          this.$moshaToast('請輸入折扣數', {
+            type: 'danger',
+            showIcon: true,
+            position: 'bottom-right',
+          });
+        }, 1);
+        errorCount += 1;
       }
 
       if (errorCount === 0) {
-        const order = {
+        const coupon = {
           data: {
-            user: this.tempOrder.user,
-            is_paid: this.tempOrder.is_paid,
+            title: this.tempCoupon.title.trim(),
+            code: this.tempCoupon.code.trim(),
+            due_date: parseInt(this.tempCoupon.due_date, 10) || 0,
+            percent: parseInt(this.tempCoupon.percent, 10) || 0,
+            is_enabled: this.tempCoupon.is_enabled,
           },
         };
-        this.editOrder(this.tempOrder.id, order, () => {
-          this.$refs.orderModal.hideModal();
-        });
+        if (this.tempCoupon.id) {
+          this.editCoupon(this.tempCoupon.id, coupon, () => {
+            this.$refs.couponModal.hideModal();
+          });
+        } else {
+          this.addCoupon(coupon, () => {
+            this.$refs.couponModal.hideModal();
+          });
+        }
       }
     },
-    paidChange(order) {
-      const updateOrder = {
+    enableChange(coupon) {
+      const updateCoupon = {
         data: {
-          is_paid: !order.is_paid,
+          title: coupon.title,
+          code: coupon.code,
+          due_date: coupon.due_date,
+          percent: coupon.percent,
+          is_enabled: 1 - coupon.is_enabled,
         },
       };
-      this.editOrder(order.id, updateOrder);
+      this.editCoupon(coupon.id, updateCoupon);
     },
-    editOrder(orderId, order, callback) {
+    addCoupon(coupon, callback) {
       this.isLoading = true;
       this.$http
-        .put(
-          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/order/${orderId}`,
-          order,
+        .post(
+          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/coupon`,
+          coupon,
         )
         .then((response) => {
           if (response.data.success) {
@@ -243,7 +268,7 @@ export default {
               showIcon: true,
               position: 'bottom-right',
             });
-            this.getOrder();
+            this.getCoupon();
           } else {
             this.$moshaToast(response.data.message, {
               type: 'danger',
@@ -261,11 +286,43 @@ export default {
           console.log(error);
         });
     },
-    deleteOrder(orderId) {
+    editCoupon(couponId, coupon, callback) {
+      this.isLoading = true;
+      this.$http
+        .put(
+          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${couponId}`,
+          coupon,
+        )
+        .then((response) => {
+          if (response.data.success) {
+            this.$moshaToast(response.data.message, {
+              type: 'success',
+              showIcon: true,
+              position: 'bottom-right',
+            });
+            this.getCoupon();
+          } else {
+            this.$moshaToast(response.data.message, {
+              type: 'danger',
+              showIcon: true,
+              position: 'bottom-right',
+            });
+            this.isLoading = false;
+          }
+
+          if (callback) {
+            callback();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    deleteCoupon(couponId) {
       this.isLoading = true;
       this.$http
         .delete(
-          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/order/${orderId}`,
+          `${process.env.VUE_APP_API_URL}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${couponId}`,
         )
         .then((response) => {
           if (response.data.success) {
@@ -275,7 +332,7 @@ export default {
               showIcon: true,
               position: 'bottom-right',
             });
-            this.getOrder();
+            this.getCoupon();
           } else {
             this.$moshaToast(response.data.message, {
               type: 'danger',
@@ -289,9 +346,12 @@ export default {
           console.log(error);
         });
     },
+    convertDatetime(unixtime) {
+      return new Date(unixtime).toLocaleString();
+    },
   },
   created() {
-    this.getOrder();
+    this.getCoupon();
   },
 };
 </script>

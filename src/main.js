@@ -14,6 +14,7 @@ import jquery from 'jquery';
 import moshaToast from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import VCalendar from 'v-calendar';
 import App from './App.vue';
 import router from './router';
 
@@ -39,4 +40,5 @@ app.use(router);
 app.use(VueAxios, axios);
 app.use(moshaToast);
 app.use(CKEditor);
+app.use(VCalendar, {});
 app.mount('#app');
