@@ -4,50 +4,18 @@
     <main>
       <router-view />
     </main>
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h2>Contact</h2>
-            <ul class="footer-list">
-              <li>
-                <a href="tel:0912345678"> <i class="fas fa-fw fa-phone"></i>&emsp;0912345678 </a>
-              </li>
-              <li>
-                <a href="mailto:0912345678">
-                  <i class="far fa-fw fa-envelope"></i>&emsp;blazer030@gmail
-                </a>
-              </li>
-              <li><i class="fas fa-fw fa-map-marker-alt"></i>&emsp;高雄市前鎮區55號</li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <h2>Quink Links</h2>
-            <ul class="footer-list">
-              <li><router-link class="nav-link" to="/">首頁</router-link></li>
-              <li><router-link class="nav-link" to="/">最新消息</router-link></li>
-              <li><router-link class="nav-link" to="/products">線上購物</router-link></li>
-              <li><router-link class="nav-link" to="/">購物說明</router-link></li>
-              <li><router-link class="nav-link" to="/">聯絡我們</router-link></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <p>
-          無商業用途，僅供學習使用
-        </p>
-      </div>
-    </footer>
+    <footer-section></footer-section>
   </div>
 </template>
 
 <script>
 import navbar from '@/components/front/Navbar.vue';
+import footerSection from '@/components/front/Footer.vue';
 
 export default {
   components: {
     navbar,
+    footerSection,
   },
 };
 </script>

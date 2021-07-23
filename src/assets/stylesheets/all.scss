@@ -21,6 +21,7 @@ img {
 
 main {
     padding-top: 56px;
+    min-height: calc(100vh - 484px);
 }
 
 header nav .nav-link {
@@ -40,6 +41,7 @@ header nav .nav-link.router-link-exact-active {
 
     main {
         padding-top: 176px;
+        min-height: calc(100vh - 318px);
     }
 
     header nav .nav-link {
@@ -137,6 +139,7 @@ nav.navbar .container {
     align-items: center;
     li {
         font-size: 1.2rem;
+        font-weight: bold;
     }
 }
 
@@ -173,6 +176,44 @@ footer {
             margin-bottom: 0;
         }
     }
+}
+
+.page-banner {
+    color: white;
+    padding: 1.5rem 0;
+    h2 {
+        font-size: 1.7rem;
+        text-shadow: 0 0 5px #000;
+    }
+}
+
+.path {
+    background: #f5f5f5;
+    font-size: 1em;
+    border-top: 1px #FFF solid;
+    border-bottom: 1px #DDD solid;
+}
+
+.pathway {
+    line-height: 50px;
+    text-align: center;
+    span {
+        color: #666;
+        font-weight: 400;
+        a {
+            color: #BBB;
+            text-decoration: none;
+        }
+    }
+    i {
+        color: $teal;
+        padding: 0 15px 0 18px;
+    }
+}
+
+.list-group {
+    position: sticky;
+    top: 200px;
 }
 
 .product_grid {
@@ -224,3 +265,4 @@ footer {
 .ck-editor__editable_inline {
     min-height: 200px !important;
 }
+
