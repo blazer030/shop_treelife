@@ -19,7 +19,7 @@
         <Form
           v-slot="{ errors }"
           ref="form"
-          class="col-xs-12 col-md-6 p-4 bg-white rounded-2"
+          class="col-xs-12 col-md-6 p-4 bg-white rounded-2 bd-top box-shadow"
           @submit="send"
         >
           <p>

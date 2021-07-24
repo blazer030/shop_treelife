@@ -13,6 +13,12 @@
           <i class="fa fa-caret-right"></i>
           <span><router-link to="/products">商品列表</router-link></span>
           <i class="fa fa-caret-right"></i>
+          <span>
+            <router-link :to="'/products?category=' + product.category">
+              {{ product.category }}
+            </router-link>
+          </span>
+          <i class="fa fa-caret-right"></i>
           <span>{{ product.title }}</span>
         </div>
       </div>
@@ -91,6 +97,12 @@ export default {
         if (response.data.success) {
           this.product = response.data.product;
           this.isLoading = false;
+        } else {
+          this.$moshaToast(response.data.message, {
+            type: 'danger',
+            showIcon: true,
+            position: 'bottom-right',
+          });
         }
       });
     },

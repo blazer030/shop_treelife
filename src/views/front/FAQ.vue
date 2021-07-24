@@ -14,8 +14,8 @@
         </div>
       </div>
     </section>
-    <section class="contact container my-4">
-      <div class="faq card mb-4" v-for="item in faqList" :key="item.id">
+    <section class="faq container my-4">
+      <div class="card mb-4" v-for="item in faqList" :key="item.id">
         <div
           class="card-header bg-primary"
           data-bs-toggle="collapse"

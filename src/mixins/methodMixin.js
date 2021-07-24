@@ -7,5 +7,8 @@ export default {
         return currency;
       })}`;
     },
+    unixTimeToDate(unixTime, format = 'yyyy/MM/DD') {
+      return this.$moment(unixTime).format(format);
+    },
   },
 };

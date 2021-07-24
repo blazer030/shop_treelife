@@ -25,8 +25,12 @@ main {
     min-height: calc(100vh - 484px);
 }
 
+a {
+    text-decoration: none;
+}
+
 header nav .nav-link {
-    border-bottom: solid $primary 3px;
+    border-bottom: solid black 3px;
 }
 
 header nav .nav-link.router-link-exact-active {
@@ -46,11 +50,15 @@ header nav .nav-link.router-link-exact-active {
     }
 
     header nav .nav-link {
+        color: black;
         border-bottom: solid white 3px;
+        &:hover:not(.router-link-exact-active) {
+            border-bottom: solid black 3px;
+        }
     }
     
     header nav .nav-link.router-link-exact-active {
-        border-bottom: solid $primary 3px;
+        border-bottom: solid black 3px;
     }
 }
 
@@ -165,7 +173,6 @@ nav.navbar .container {
                 margin-bottom: 0.5rem;
                 a {
                     color:white;
-                    text-decoration: none;
                     padding: 0;
                 }
                 a:hover, a:focus {
@@ -203,7 +210,6 @@ nav.navbar .container {
         font-weight: 400;
         a {
             color: #BBB;
-            text-decoration: none;
         }
     }
     i {
@@ -292,7 +298,6 @@ nav.navbar .container {
         display: block;
         .category {
             float: right;
-            text-decoration: none;
             font-size: 0.55em;
         }
     }
@@ -307,6 +312,18 @@ nav.navbar .container {
     }
 }
 
+.news-item {
+    .image {
+        height: 100px;
+        background-size: cover;
+        background-position: center center;
+    }   
+
+    .title {
+        font-size: 1.7rem;
+    }
+}
+
 .faq {
     .card-header {
         color: white;
@@ -315,11 +332,12 @@ nav.navbar .container {
     }
 }
 
-.contact {
-    form {
-        border-top: 3px solid $primary;
-        box-shadow: 2px 2px 5px rgba(100, 100, 100, 0.16);
-    }
+.bd-top {
+    border-top: 3px solid $primary;
+}
+
+.box-shadow {
+    box-shadow: 2px 2px 5px rgba(100, 100, 100, 0.16);
 }
 
 .pointer {

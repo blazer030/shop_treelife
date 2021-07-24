@@ -25,6 +25,14 @@ const routes = [
         path: 'faq',
         component: () => import('../views/front/FAQ.vue'),
       },
+      {
+        path: 'news',
+        component: () => import('../views/front/News.vue'),
+      },
+      {
+        path: 'newsPage/:id',
+        component: () => import('../views/front/NewsPage.vue'),
+      },
     ],
   },
   {

@@ -96,6 +96,12 @@ export default {
       this.$http.get(url).then((response) => {
         if (response.data.success) {
           this.products = response.data.products;
+        } else {
+          this.$moshaToast(response.data.message, {
+            type: 'danger',
+            showIcon: true,
+            position: 'bottom-right',
+          });
         }
         this.isLoading = false;
       });
@@ -131,6 +137,11 @@ export default {
   },
   created() {
     this.getProducts();
+    if (this.categoryList.indexOf(this.$route.query?.category) !== -1) {
+      this.filterCategory = this.$route.query.category;
+    } else {
+      this.filterCategory = '';
+    }
   },
 };
 </script>
