@@ -23,9 +23,12 @@
             v-for="item in newsList"
             :key="item.id"
           >
-            <router-link :to="`/newsPage/${item.id}`" class="d-flex flex-row ">
-              <div class="image w-25" :style="{ backgroundImage: `url(${item.imageUrl})` }"></div>
-              <div class="content w-75 p-2 ps-4">
+            <router-link :to="`/newsPage/${item.id}`" class="row m-0">
+              <div
+                class="image col-md-4"
+                :style="{ backgroundImage: `url(${item.imageUrl})` }"
+              ></div>
+              <div class="content col-md-8 p-2 ps-4">
                 <div class="badge bg-secondary d-inline"> {{ item.author }} </div>
                 <p class="ms-2 d-inline"> {{ unixTimeToDate(item.create_at) }} </p>
                 <h2 class="title mt-3">{{ item.title }}</h2>

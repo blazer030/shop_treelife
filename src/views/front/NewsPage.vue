@@ -22,7 +22,9 @@
           <span class="badge bg-secondary me-4"> {{ news.author }} </span>
           {{ unixTimeToDate(news.create_at) }}
         </p>
-        <div class="px-4" v-html="news.article"></div>
+        <div class="row justify-content-center">
+          <div class="col-lg-10" v-html="news.article"></div>
+        </div>
         <div class="line_button mb-0">
           <router-link to="/news" class="btn btn-primary">
             <i class="fa fa-chevron-left"></i>&nbsp;返回
