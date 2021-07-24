@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import pagination from '@/components/admin/Pagination.vue';
+import pagination from '@/components/common/Pagination.vue';
 import orderModal from '@/components/admin/OrderModal.vue';
 import deleteModal from '@/components/admin/DeleteModal.vue';
 

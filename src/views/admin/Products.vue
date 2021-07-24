@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import pagination from '@/components/admin/Pagination.vue';
+import pagination from '@/components/common/Pagination.vue';
 import productModal from '@/components/admin/ProductModal.vue';
 import deleteModal from '@/components/admin/DeleteModal.vue';
 

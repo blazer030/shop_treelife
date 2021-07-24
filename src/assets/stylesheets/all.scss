@@ -12,6 +12,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    background: #f2f2f2;
 }
 
 img {
@@ -57,7 +58,7 @@ nav.navbar .container {
     display: block;
 }
 
-.btn_add_to_cart {
+.btn-add-to-cart {
     display: block;
     width: 100%;
 }
@@ -143,7 +144,7 @@ nav.navbar .container {
     }
 }
 
-footer {
+.wrap footer {
     background: $primary;
     color: white;
     padding: 2rem 0;
@@ -216,7 +217,18 @@ footer {
     top: 200px;
 }
 
-.product_grid {
+.product-grid {
+    box-shadow: 2px 2px 5px rgba(100, 100, 100, 0.16);
+
+    .name {
+        font-weight: 500;
+    }
+
+    .price {
+        font-weight: bold;
+        color: red;
+    }
+
     img:hover {
         left: -50px;
         transform: scale(1.2);
@@ -228,9 +240,27 @@ footer {
         -o-transition: all 0.5s ease 0s;
         -ms-transition: all 0.5s ease 0s;
         transition: all 0.5s ease 0s;
+    } 
+
+    img {
+        height: 400px;
+    }
+    
+    
+    @media (min-width: 576px) {
+        img {
+            height: 300px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        img {
+            height: 400px;
+        }
     }
 }
 
+   
 .line_button {
     width: 100%;
     text-align: center;
@@ -238,20 +268,58 @@ footer {
     margin: 0 auto 30px;
 }
 
-.product_grid:hover .product_link {
+.product-grid:hover .product-link {
 	overflow: hidden;
 }
 
-.h100 {
-    height: 100px;
+.filter {
+    li {
+        &:hover:not(.active) {
+            background: $secondary;
+        }
+    }
 }
 
-.h200 {
-    height: 200px;
+.product-info {
+    .image {
+        height: 500px;
+        background-size: cover;
+        background-position: center center;
+    }
+    .name {
+        font-weight: bold;
+        color: $primary;
+        display: block;
+        .category {
+            float: right;
+            text-decoration: none;
+            font-size: 0.55em;
+        }
+    }
+    .price {
+        text-align: right;
+        border-bottom: 1px solid $primary;
+        span {
+            font-weight: bold;
+            color: #ED6953;
+            font-size: 1.5em;
+        }
+    }
 }
 
-.h400 {
-    height: 400px;
+.faq {
+    .card-header {
+        color: white;
+        font-size: 20px;
+        line-height: 1.5;
+    }
+}
+
+.contact {
+    form {
+        border-top: 3px solid $primary;
+        box-shadow: 2px 2px 5px rgba(100, 100, 100, 0.16);
+    }
 }
 
 .pointer {

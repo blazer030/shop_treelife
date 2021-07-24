@@ -18,25 +18,38 @@
       </div>
     </section>
     <section class="container my-4">
-      <div class="row">
+      <div class="row product-info">
         <div class="col-sm-12 col-md-5 text-center">
-          <img :src="this.product.imageUrl" class="img-fluid h400" />
+          <div class="image" :style="{ backgroundImage: `url(${this.product.imageUrl})` }"></div>
         </div>
         <div class="col-sm-12 col-md-7">
-          <h1>{{ this.product.title }}</h1>
-          <p>{{ this.product.content }}</p>
+          <h1 class="name">
+            {{ this.product.title }}
+            <router-link
+              :to="'/products?category=' + this.product.category"
+              class="category badge rounded-pill bg-secondary"
+            >
+              {{ this.product.category }}
+            </router-link>
+          </h1>
+          <div class="mb-4 price">
+            <span>{{ currency(this.product.price) }} </span> / {{ this.product.unit }}
+          </div>
+          <p class="description">{{ this.product.description }}</p>
         </div>
       </div>
       <div class="line_button mt-5">
-        <router-link to="/products" class="btn btn-primary"
-          ><i class="fa fa-chevron-left"></i>&nbsp;返回</router-link
-        >
+        <router-link to="/products" class="btn btn-primary">
+          <i class="fa fa-chevron-left"></i>&nbsp;返回
+        </router-link>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import methodMixin from '@/mixins/methodMixin';
+
 export default {
   data() {
     return {
@@ -44,6 +57,7 @@ export default {
       isLoading: false,
     };
   },
+  mixins: [methodMixin],
   methods: {
     getProduct() {
       this.isLoading = true;

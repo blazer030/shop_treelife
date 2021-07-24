@@ -37,17 +37,9 @@
 <script>
 export default {
   props: ['pageInfo'],
-  data() {
-    return {
-      pages: [],
-    };
-  },
-  mounted() {
-    this.pages = [...Array(this.pageInfo.total_pages).keys()].map((n) => n + 1);
-  },
-  watch: {
-    'pageInfo.total_pages': function () {
-      this.pages = [...Array(this.pageInfo.total_pages).keys()].map((n) => n + 1);
+  computed: {
+    pages() {
+      return [...Array(this.pageInfo.total_pages).keys()].map((n) => n + 1);
     },
   },
 };

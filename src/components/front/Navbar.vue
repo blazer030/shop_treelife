@@ -25,7 +25,7 @@
             <li><router-link class="nav-link" to="/">首頁</router-link></li>
             <li><router-link class="nav-link" to="/news">最新消息</router-link></li>
             <li><router-link class="nav-link" to="/products">商品列表</router-link></li>
-            <li><router-link class="nav-link" to="/notice">購物說明</router-link></li>
+            <li><router-link class="nav-link" to="/faq">常見問題</router-link></li>
             <li><router-link class="nav-link" to="/contact">聯絡我們</router-link></li>
           </ul>
         </div>
@@ -59,7 +59,7 @@
               <router-link class="nav-link" to="/products">商品列表</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/notice">購物說明</router-link>
+              <router-link class="nav-link" to="/faq">常見問題</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/contact">聯絡我們</router-link>

@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import pagination from '@/components/admin/Pagination.vue';
+import pagination from '@/components/common/Pagination.vue';
 import couponModal from '@/components/admin/CouponModal.vue';
 import deleteModal from '@/components/admin/DeleteModal.vue';
 

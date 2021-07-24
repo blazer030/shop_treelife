@@ -16,19 +16,27 @@
     </section>
     <section class="contact container my-4">
       <div class="row justify-content-center">
-        <Form v-slot="{ errors }" ref="form" class="col-xs-12 col-md-6 mb-4 my-4" @submit="send">
+        <Form
+          v-slot="{ errors }"
+          ref="form"
+          class="col-xs-12 col-md-6 p-4 bg-white rounded-2"
+          @submit="send"
+        >
           <p>
             若您有任何問題或建議歡迎來電
             <a href="tel:0912345678">0912-345-678</a>
             或填寫以下表單與我們聯繫，客服人員將儘速回覆您。
           </p>
           <div class="mb-3">
-            <label for="name" class="form-label">姓名</label>
+            <label for="name" class="form-label">
+              姓名
+              <span class="badge bg-danger">必填</span>
+            </label>
             <Field
               id="name"
               name="姓名"
               type="text"
-              class="form-control"
+              class="form-control rounded-0"
               :class="{ 'is-invalid': errors['姓名'] }"
               placeholder="請輸入姓名"
               rules="required"
@@ -37,12 +45,15 @@
             <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="tel" class="form-label">聯絡電話</label>
+            <label for="tel" class="form-label">
+              聯絡電話
+              <span class="badge bg-danger">必填</span>
+            </label>
             <Field
               id="tel"
               name="聯絡電話"
               type="tel"
-              class="form-control"
+              class="form-control rounded-0"
               :class="{ 'is-invalid': errors['聯絡電話'] }"
               placeholder="請輸入聯絡電話"
               rules="min:8|required"
@@ -51,12 +62,15 @@
             <ErrorMessage name="聯絡電話" class="invalid-feedback"></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">電子信箱</label>
+            <label for="email" class="form-label">
+              電子信箱
+              <span class="badge bg-danger">必填</span>
+            </label>
             <Field
               id="email"
               name="電子信箱"
               type="email"
-              class="form-control"
+              class="form-control rounded-0"
               :class="{ 'is-invalid': errors['電子信箱'] }"
               placeholder="請輸入電子信箱"
               rules="email|required"
@@ -65,12 +79,14 @@
             <ErrorMessage name="電子信箱" class="invalid-feedback"></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="message" class="form-label">詢問內容</label>
+            <label for="message" class="form-label">
+              詢問內容 <span class="badge bg-danger">必填</span>
+            </label>
             <Field
               id="message"
               name="詢問內容"
               as="textarea"
-              class="form-control"
+              class="form-control rounded-0"
               :class="{ 'is-invalid': errors['詢問內容'] }"
               placeholder="請輸入詢問內容"
               rules="required"
@@ -82,7 +98,7 @@
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary">
-              送出訂單
+              聯絡我們
             </button>
           </div>
         </Form>

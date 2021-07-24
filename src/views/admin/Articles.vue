@@ -91,7 +91,7 @@
 
 <script>
 import articleModal from '@/components/admin/ArticleModal.vue';
-import pagination from '@/components/admin/Pagination.vue';
+import pagination from '@/components/common/Pagination.vue';
 import deleteModal from '@/components/admin/DeleteModal.vue';
 
 export default {

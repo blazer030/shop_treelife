@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <navbar></navbar>
     <main id="notfound">
       <div class="notfound">

@@ -20,10 +20,10 @@
           <h2>Quink Links</h2>
           <ul class="footer-list">
             <li><router-link class="nav-link" to="/">首頁</router-link></li>
-            <li><router-link class="nav-link" to="/">最新消息</router-link></li>
+            <li><router-link class="nav-link" to="/news">最新消息</router-link></li>
             <li><router-link class="nav-link" to="/products">商品列表</router-link></li>
-            <li><router-link class="nav-link" to="/">購物說明</router-link></li>
-            <li><router-link class="nav-link" to="/">聯絡我們</router-link></li>
+            <li><router-link class="nav-link" to="/faq">常見問題</router-link></li>
+            <li><router-link class="nav-link" to="/contact">聯絡我們</router-link></li>
           </ul>
         </div>
       </div>

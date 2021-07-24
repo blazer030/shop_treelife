@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading :active="isLoading"/>
+    <loading :active="isLoading" />
     <section class="page-banner bg-primary">
       <div class="container">
         <h2><i class="fas fa-shopping-basket"></i>&emsp;商品列表</h2>
@@ -18,28 +18,41 @@
     <section class="container my-4">
       <div class="row">
         <div class="col-lg-2 col-md-3 mb-4">
-          <ul class="list-group rounded-0">
-            <li class="list-group-item active" aria-current="true">商品類別(無作用)</li>
-            <li class="list-group-item">商品類別(無作用)</li>
-            <li class="list-group-item">商品類別(無作用)</li>
-            <li class="list-group-item">商品類別(無作用)</li>
-            <li class="list-group-item">商品類別(無作用)</li>
+          <ul class="filter list-group rounded-0">
+            <li
+              class="list-group-item pointer"
+              :class="{ active: filterCategory === '' }"
+              @click.prevent="filterCategory = ''"
+            >
+              全部商品
+            </li>
+            <li
+              class="list-group-item pointer"
+              v-for="item in categoryList"
+              :key="item"
+              :class="{ active: filterCategory === item }"
+              @click.prevent="filterCategory = item"
+            >
+              {{ item }}
+            </li>
           </ul>
         </div>
         <div class="col-lg-10 col-md-9">
           <div class="row">
-            <div class="col-lg-4 col-sm-6 mb-4" v-for="product in products" :key="product.id">
-              <div class="card product_grid">
-                <router-link class="product_link" :to="`/product/${product.id}`">
-                  <img :src="product.imageUrl" class="card-img-top h400" :alt="product.title" />
+            <div class="col-lg-4 col-sm-6 mb-4" v-for="product in filterProducts" :key="product.id">
+              <div class="card product-grid">
+                <router-link class="product-link" :to="`/product/${product.id}`">
+                  <img :src="product.imageUrl" class="card-img-top" :alt="product.title" />
                 </router-link>
                 <div class="card-body">
-                  <h5 class="card-title">{{ product.title }}</h5>
-                  <p class="card-text">{{ product.description }}</p>
-                  <div class="text-right mb-3">{{ product.price }} 元</div>
+                  <h5 class="card-title name">
+                    {{ product.title }}
+                    <span class="badge rounded-pill bg-secondary">{{ product.category }}</span>
+                  </h5>
+                  <div class="text-right mb-3 price">{{ currency(product.price) }}</div>
                   <button
                     type="button"
-                    class="btn btn-outline-primary btn_add_to_cart"
+                    class="btn btn-outline-primary btn-add-to-cart"
                     @click="addToCart(product.id, 1)"
                     :disabled="loadingStatus.loadingItem === product.id"
                   >
@@ -61,16 +74,21 @@
 </template>
 
 <script>
+import methodMixin from '@/mixins/methodMixin';
+
 export default {
   data() {
     return {
       products: [],
+      categoryList: ['盆栽', '盆器', '圓藝器具', '種子'],
+      filterCategory: '',
       isLoading: false,
       loadingStatus: {
         loadingItem: '',
       },
     };
   },
+  mixins: [methodMixin],
   methods: {
     getProducts() {
       this.isLoading = true;
@@ -100,6 +118,15 @@ export default {
     },
     goToPage(id) {
       this.$router.push(`/product/${id}`);
+    },
+  },
+  computed: {
+    filterProducts() {
+      if (this.filterCategory) {
+        return this.products.filter((item) => item.category.includes(this.filterCategory));
+      }
+
+      return this.products;
     },
   },
   created() {
