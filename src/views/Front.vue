@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <navbar></navbar>
+    <navbar ref="nav"></navbar>
     <main>
       <router-view />
     </main>
@@ -16,6 +16,11 @@ export default {
   components: {
     navbar,
     footerSection,
+  },
+  watch: {
+    $route() {
+      this.$refs.nav.closeNav();
+    },
   },
 };
 </script>

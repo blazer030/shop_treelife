@@ -16,7 +16,7 @@
       </div>
     </section>
     <section class="news container my-4">
-      <div class="p-4 bg-white rounded-2 bd-top box-shadow">
+      <div class="p-4">
         <ul class="news p-0">
           <li
             class="news-item card mb-4 box-shadow"

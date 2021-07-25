@@ -70,3 +70,25 @@
     </nav>
   </header>
 </template>
+
+<script>
+// import Collapse from 'bootstrap/js/dist/collapse';
+
+export default {
+  data() {
+    return {
+      collapse: '',
+    };
+  },
+  methods: {
+    closeNav() {
+      // this.collapse.hide();
+    },
+  },
+  mounted() {
+    /* this.collapse = new Collapse(document.getElementById('navbarText'), {
+      toggle: false,
+    }); */
+  },
+};
+</script>

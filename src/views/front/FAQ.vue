@@ -20,12 +20,12 @@
           class="card-header bg-primary"
           data-bs-toggle="collapse"
           :data-bs-target="'#faq' + item.id"
-          aria-expanded="false"
+          aria-expanded="true"
           :aria-controls="'#faq' + item.id"
         >
           <i class="far fa-question-circle"></i>&emsp;{{ item.question }}
         </div>
-        <div class="collapse" :id="'faq' + item.id">
+        <div class="collapse show" :id="'faq' + item.id">
           <div class="card-body">
             <p class="card-text">
               {{ item.anstion }}

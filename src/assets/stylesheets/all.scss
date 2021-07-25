@@ -30,7 +30,7 @@ a {
 }
 
 header nav .nav-link {
-    border-bottom: solid black 3px;
+    border-bottom: solid $primary 3px;
 }
 
 header nav .nav-link.router-link-exact-active {
@@ -50,15 +50,14 @@ header nav .nav-link.router-link-exact-active {
     }
 
     header nav .nav-link {
-        color: black;
         border-bottom: solid white 3px;
         &:hover:not(.router-link-exact-active) {
-            border-bottom: solid black 3px;
+            border-bottom: solid $primary 3px;
         }
     }
     
     header nav .nav-link.router-link-exact-active {
-        border-bottom: solid black 3px;
+        border-bottom: solid $primary 3px;
     }
 }
 
